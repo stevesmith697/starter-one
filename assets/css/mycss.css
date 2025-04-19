@@ -15,6 +15,7 @@
     --theme-color:#cc8f4e;
     --button-radius: 6px;
     --button-color: #cc8f4e;
+    --footer-text: #fff;
 }
 
 *{
@@ -22,9 +23,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html{
+    width: 100%;
+}
+
 body{
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
     background-color: var(--body-background);
 }
 
@@ -68,6 +74,52 @@ svg path{
     font-family: 'Poppins', sans-serif;
 }
 
+.container{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav-button{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border: 1px solid var(--global-font-color);
+    border-radius: 6px;
+}
+
+.nav-button span{
+    background-color: var(--global-font-color);
+    height: 2px; 
+    border-radius: 20px;
+    width: calc(100% - 12px);
+    position: absolute;
+    left: 6px;
+    top: 25%;
+    transition: .5s ease;
+}
+
+.nav-button span:nth-child(2){
+    top: 50%;
+}
+
+.nav-button span:nth-child(3){
+    top: 75%;
+}
+
+header.hamburger-active .nav-button span:nth-child(1){
+    transform: rotate(45deg) translate(6px, 7px);
+}
+
+header.hamburger-active .nav-button span:nth-child(2){
+   transform: translateX(100%);
+   opacity: 0;
+}
+
+
+header.hamburger-active .nav-button span:nth-child(3){
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Inputs */
 
 input,select,textarea{
@@ -89,7 +141,7 @@ input::placeholder,select,textarea::placeholder{
 .btn-primary,input[type="submit"]{
     border-radius: var(--button-radius);
     border:1px solid var(--button-color);
-    color: var(--button-color);
+    color: var(--button-color) !important;
     font-weight: 600;
     background-color: var(--body-background)!important;
     max-height: 50px;
@@ -138,3 +190,83 @@ footer li:hover{
     opacity: .6;
 }
 
+footer input,select,textarea{
+    border: 1px solid var(--footer-text);
+    color: var(--footer-text) !important;
+}
+
+footer input::placeholder,select,textarea::placeholder{
+    color: var(--footer-text) !important;
+}
+
+footer svg path{
+    fill:var(--footer-text);
+}
+
+.close-btn{
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    border: 1px solid var(--global-font-color);
+    padding: 6px;
+    background-image: url('../svg/icon-close.svg') !important;
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+header nav .close-btn{
+    display: none;
+}
+
+@media screen and (max-width:980px){
+    header nav{
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      max-width: 400px;
+      top: 0;
+      right: 0;
+      background-color: var(--body-background);
+      padding: 40px;
+      display: flex;
+      box-shadow: 0px 0px 18px rgba(0,0,0,.2);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: 999;
+      transform: translateX(100px);      
+      transition: .5s ease;
+    }
+
+    header.hamburger-active nav{
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transform: translateX(0); 
+    }
+
+header nav .close-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 20;
+}
+
+    header nav ul{
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 20px;
+    }
+
+    header nav ul li *{
+        font-size: 24px !important;
+        font-weight: 600 !important;
+    }
+
+    header nav ul li a:hover{
+        text-decoration: underline;
+    }
+}

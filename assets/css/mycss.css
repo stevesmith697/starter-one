@@ -248,6 +248,7 @@ header nav .close-btn{
     }
 
 header nav .close-btn{
+    display: flex !important;
     position: absolute;
     right: 20px;
     top: 20px;
